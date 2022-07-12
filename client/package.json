@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.18.6",
     "@fortawesome/fontawesome-free": "^5.15.3",
+    "@playwright/test": "^1.23.2",
     "@types/react": "^17.0.47",
     "@types/react-dom": "^18.0.5",
     "@types/react-router-dom": "^5.3.3",
