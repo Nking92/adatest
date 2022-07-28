@@ -109,7 +109,7 @@ export default class Row extends React.Component {
     // console.log("real render Row");
 
     const main_score = this.props.scoreColumns ? this.props.scoreColumns[0] : undefined;
-    // console.log("rendering row", this.props)
+    console.log("rendering row", this.props, this.state)
     // apply the value1/value2/topic filters
     if (this.state.topic_name === null) {
       if (this.props.value1Filter && this.state.value1 !== "") {
@@ -293,6 +293,8 @@ export default class Row extends React.Component {
                 this.props.outputMode === "image" ?
                     this.state.output.split(",").map((imgUrl) =>
                       {
+                        console.log("Image url: ", imgUrl);
+                        imgUrl = imgUrl.replaceAll('"', '');
                         if (imgUrl === "") {
                           return <div className="loading-circles" />
                         } else {

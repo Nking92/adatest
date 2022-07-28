@@ -9,8 +9,9 @@ print("static image dir", static_image_dir)
 os.makedirs(static_image_dir, exist_ok=True)
 
 # Make scorer and text generator
-def fake_model(prompts: list[str]):
+def fake_model(prompts):
   return prompts
+
 scorer = adatest.ImageScorer(fake_model, static_image_dir)
 openai_generator = adatest.generators.OpenAI('curie', api_key=os.getenv('OPENAI_API_KEY'))
 

@@ -458,15 +458,16 @@ class TestTreeBrowser():
                 self.test_tree.loc[test_id, self.score_columns] = abs(float(self.test_tree.loc[test_id, self.score_columns])) * sign
 
             # send just the data that changed back to the frontend
-            sendback_data["scores"] = {c: [[test_id, v] for v in score_parts(self.test_tree.loc[test_id, c])] for c in self.score_columns}
-            outputs = {c: [[test_id, json.loads(self.test_tree.loc[test_id].get(c[:-6] + " raw outputs", "{}"))]] for c in self.score_columns}
-            sendback_data["raw_outputs"] = outputs
-            sendback_data["output"] = self.test_tree.loc[test_id, "output"]
-            sendback_data["label"] = self.test_tree.loc[test_id, "label"]
-            sendback_data["labeler"] = self.test_tree.loc[test_id, "labeler"]
-            sendback_data.update(self.test_display_parts(self.test_tree.loc[test_id]))
-            self.comm.send({test_id: sendback_data})
+            # sendback_data["scores"] = {c: [[test_id, v] for v in score_parts(self.test_tree.loc[test_id, c])] for c in self.score_columns}
+            # outputs = {c: [[test_id, json.loads(self.test_tree.loc[test_id].get(c[:-6] + " raw outputs", "{}"))]] for c in self.score_columns}
+            # sendback_data["raw_outputs"] = outputs
+            # sendback_data["output"] = self.test_tree.loc[test_id, "output"]
+            # sendback_data["label"] = self.test_tree.loc[test_id, "label"]
+            # sendback_data["labeler"] = self.test_tree.loc[test_id, "labeler"]
+            # sendback_data.update(self.test_display_parts(self.test_tree.loc[test_id]))
+            # self.comm.send({test_id: sendback_data})
             
+            self._refresh_interface()
             self._auto_save()
 
         else:

@@ -14,13 +14,17 @@ import random
 import uuid
 import logging
 
-from .utils._dalle_mock import get_fake_dalle_result
+from .utils._dalle_mock import get_ada_image_result, get_black_image_result
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 SUBKEY = os.environ.get("SUBKEY")
+MOCK_DALLE = os.environ.get("MOCK_DALLE")
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
+
+if MOCK_DALLE is not None:
+  log.debug("DALLE API mocking enabled")
 
 auth_headers_openai = {
     "authorization": f"Bearer {OPENAI_API_KEY}",
@@ -63,8 +67,11 @@ def generate_image(prompt, image_type, batch_size=1, seed=None, retry=True):
 
     if prompt == "New test" or prompt == "":
       # TODO: Discuss how to handle default value prompt
-      log.debug("Generating fake result for default prompt 'New test'")
-      response = get_fake_dalle_result(batch_size)
+      log.debug(f"Generating black image result for default prompt '{prompt}'")
+      response = get_black_image_result(batch_size)
+    elif MOCK_DALLE is not None:
+      log.debug(f"Generating fake result for prompt '{prompt}'")
+      response = get_ada_image_result(batch_size)
     else:
       response = send_dalle_request()
 

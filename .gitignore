@@ -13,3 +13,4 @@ local_data
 notebooks/TDD/data
 env/
 build/
+*/images
